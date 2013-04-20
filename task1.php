@@ -13,26 +13,32 @@
 function jSort() {
     $args = func_get_args();
 
+    // if empty return blank :)
     if (empty($args)) {
         return '';
     }
 
+    // get the iteration count
     $length = count($args);
-    
-     $i = $length;
+
+
+    // so its length * length - 1
+    // i.e for 9 strings, we have to compare, 8 times 9
+    $i = $length;
     while ($i > 0) {
         $i--;
-        for($j=0;$j<$i;$j++){
-            $next_index = $j+1;
-            if($args[$j]>$args[$next_index]){
+
+        // compare adjustance.
+        for ($j = 0; $j < $i; $j++) {
+            $next_index = $j + 1;
+            if ($args[$j] > $args[$next_index]) {
                 $temp = $args[$j];
                 $args[$j] = $args[$next_index];
                 $args[$next_index] = $temp;
             }
         }
     }
-    return implode(",",$args);
+    return implode(",", $args);
 }
-
-print jSort("z","b", "c", "a","d","e");
+print jSort("z", "b", "c", "a", "d", "e");
 ?>
