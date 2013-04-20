@@ -27,6 +27,10 @@
 function sanitize($html, $allowed) {
 
     $allowed_tags = array();
+    
+    $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $html);
+    $html = preg_replace('#<style(.*?)>(.*?)</style>#is', '', $html);
+    
     foreach ($allowed as $tag => $attr) {
         // if no attrib. are specified
         $allowed_tags[] = is_array($attr) ? $tag : $attr;
@@ -34,10 +38,13 @@ function sanitize($html, $allowed) {
     $allowed_tags = "<" . implode(">,<", $allowed_tags) . ">";
     $return = strip_tags($html, $allowed_tags);
 
+    
+    
 
     $matches = array();
     foreach ($allowed as $tag => $attr) {
         $allowed_attribtues = array();
+        
         if (is_array($attr)) {
             foreach ($attr as $ea) {
                 preg_match('/<'.$tag.'\s*(.*?)\s*'.$ea.'=\'(.*?)\'>/i', $return, $matches);
@@ -61,6 +68,7 @@ function sanitize($html, $allowed) {
 }
 
 $html = "<div><p align='left' onclick='alert(1)'>sample <b><i>text</i></b><script>alert(2);</script></p></div>";
+$html = "<div><p align='left' onclick='alert(1)'>sample <b><i>text</i></b><script type='text/javascript'>alert(2);</script></p></div>";
 $allowed = array('b', 'p' => array('align'));
 print sanitize($html, $allowed);
 ?>
