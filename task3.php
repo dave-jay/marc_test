@@ -34,7 +34,7 @@ function countones_custom($num){
     $count_after_filter = count($array);
     
     // reutrn the substraction
-    return $count - $count_after_filter;
+    return $count - $count_after_filter;  
 }
 print countones_custom(12);
 
