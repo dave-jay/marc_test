@@ -10,6 +10,10 @@
  * 
  * 
  */
+
+$a = array('01','1','0x1','1.0');
+
+
 function jSort() {
     $args = func_get_args();
 
@@ -31,7 +35,8 @@ function jSort() {
         // compare adjustance.
         for ($j = 0; $j < $i; $j++) {
             $next_index = $j + 1;
-            if ($args[$j] > $args[$next_index]) {
+            //if (strval($args[$j]) > strval($args[$next_index])) {
+            if (strcmp ($args[$j],$args[$next_index])) {
                 $temp = $args[$j];
                 $args[$j] = $args[$next_index];
                 $args[$next_index] = $temp;
@@ -40,5 +45,7 @@ function jSort() {
     }
     return implode(",", $args);
 }
-print jSort("z", "b", "c", "a", "d", "e");
+//print jSort("z", "b", "c", "a", "d", "e");
+
+print jSort('01','1','0x1','1.0');
 ?>

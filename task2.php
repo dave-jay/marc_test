@@ -32,7 +32,8 @@
 
  * */
 function checkdomain($s) {
-    return preg_match('your regexp here', $s) ? 'MATCH' : 'NO MATCH';
+    return preg_match('/[a-z0-9]$/', $s) ? 'MATCH' : 'NO MATCH';
 }
 
+print checkdomain("-test.com");
 ?>
